@@ -2,3 +2,5 @@
 /build
 /.vscode
 /coverage
+.env
+.env.test
