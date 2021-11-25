@@ -1,9 +1,4 @@
-const { STATUS_CODE } = require("./constants");
-
-const messages = {
-  not_found: "The address you requested doesn`t exist",
-  not_allowed: "This method not allowed",
-};
+const { STATUS_CODE, ERROR_MESSAGES } = require("./constants");
 
 const errorBase = (req, res, statusCode, message) => {
   res.writeHead(statusCode, { "Content-Type": "application/json" });
@@ -11,11 +6,15 @@ const errorBase = (req, res, statusCode, message) => {
 };
 
 const errorNotFound = (req, res) => {
-  errorBase(req, res, STATUS_CODE.NOT_FOUND, messages.not_found);
+  errorBase(req, res, STATUS_CODE.NOT_FOUND, ERROR_MESSAGES.not_found);
 };
 
 const errorMethodNotAllowed = (req, res) => {
-  errorBase(req, res, STATUS_CODE.NOT_ALLOWED, messages.not_allowed);
+  errorBase(req, res, STATUS_CODE.NOT_ALLOWED, ERROR_MESSAGES.not_allowed);
 };
 
-module.exports = { errorNotFound, errorMethodNotAllowed };
+const errorBadRequest = (req, res) => {
+  errorBase(req, res, STATUS_CODE.BAD_REQUEST, ERROR_MESSAGES.bad_request);
+};
+
+module.exports = { errorNotFound, errorMethodNotAllowed, errorBadRequest };

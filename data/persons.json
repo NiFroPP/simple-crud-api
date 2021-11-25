@@ -4,5 +4,11 @@
     "name": "Nick",
     "age": "36",
     "hobbies": ["soccer", "development", "cosmos"]
+  },
+  {
+    "id": "2",
+    "name": "Nick2",
+    "age": "36_36",
+    "hobbies": ["soccer", "development", "cosmos"]
   }
 ]

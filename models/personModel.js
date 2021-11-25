@@ -6,4 +6,11 @@ const getData = () => {
   });
 };
 
-module.exports = { getData };
+const getById = id => {
+  return new Promise((resolve, reject) => {
+    const person = data.find(curr => curr.id === id);
+    resolve(person);
+  });
+};
+
+module.exports = { getData, getById };
