@@ -1,7 +1,7 @@
-const { STATUS_CODE, ERROR_MESSAGES } = require("./constants");
+const { STATUS_CODE, ERROR_MESSAGES, CONTENT_TYPE } = require("./constants");
 
 const errorBase = (req, res, statusCode, message) => {
-  res.writeHead(statusCode, { "Content-Type": "application/json" });
+  res.writeHead(statusCode, CONTENT_TYPE.JSON);
   res.end(JSON.stringify({ message }));
 };
 
@@ -17,4 +17,13 @@ const errorBadRequest = (req, res) => {
   errorBase(req, res, STATUS_CODE.BAD_REQUEST, ERROR_MESSAGES.bad_request);
 };
 
-module.exports = { errorNotFound, errorMethodNotAllowed, errorBadRequest };
+const errorInvalidPerson = (req, res) => {
+  errorBase(req, res, STATUS_CODE.BAD_REQUEST, ERROR_MESSAGES.missing_field);
+};
+
+module.exports = {
+  errorNotFound,
+  errorMethodNotAllowed,
+  errorBadRequest,
+  errorInvalidPerson,
+};

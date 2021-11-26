@@ -1,3 +1,6 @@
+const fs = require("fs");
+const Uuid = require("uuid");
+
 const data = require("../data/persons.json");
 
 const getData = () => {
@@ -13,4 +16,14 @@ const getById = id => {
   });
 };
 
-module.exports = { getData, getById };
+const createPerson = person => {
+  return new Promise((resolve, reject) => {
+    const newPerson = { id: Uuid.v4(), ...person };
+    data.push(newPerson);
+
+    fs.writeFileSync("./data/persons.json", JSON.stringify(data));
+    resolve(newPerson);
+  });
+};
+
+module.exports = { getData, getById, createPerson };

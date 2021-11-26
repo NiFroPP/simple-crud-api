@@ -1,7 +1,11 @@
 const http = require("http");
 require("dotenv").config();
 
-const { getPersons, getPersonById } = require("./controllers/personController");
+const {
+  getPersons,
+  getPersonById,
+  setNewPerson,
+} = require("./controllers/personController");
 const { errorNotFound, errorMethodNotAllowed } = require("./utils/errors");
 const { API_PATH, METHOD } = require("./utils/constants");
 
@@ -11,6 +15,8 @@ const server = http.createServer((req, res) => {
   if (req.url === API_PATH.person) {
     if (req.method === METHOD.GET) {
       getPersons(req, res);
+    } else if (req.method === METHOD.POST) {
+      setNewPerson(req, res);
     } else {
       errorMethodNotAllowed(req, res);
     }
