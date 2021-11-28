@@ -1,4 +1,9 @@
-const { getData, getById, createPerson } = require("../models/personModel");
+const {
+  getData,
+  getById,
+  createPerson,
+  updateData,
+} = require("../models/personModel");
 const { STATUS_CODE, CONTENT_TYPE } = require("../utils/constants");
 const { errorBadRequest, errorInvalidPerson } = require("../utils/errors");
 const { validationPerson, validationJson } = require("../utils/validation");
@@ -59,4 +64,48 @@ const setNewPerson = async (req, res) => {
   }
 };
 
-module.exports = { getPersons, getPersonById, setNewPerson };
+const updatePerson = async (req, res, personId) => {
+  try {
+    const person = await getById(personId);
+
+    console.log(person);
+
+    if (!person) {
+      errorBadRequest(req, res);
+    }
+
+    const buffers = [];
+
+    for await (const chunk of req) {
+      buffers.push(chunk);
+    }
+
+    let data = Buffer.concat(buffers).toString();
+
+    const isJsonString = validationJson(data);
+
+    if (isJsonString) {
+      const { name, age, hobbies } = JSON.parse(data);
+      const personData = {
+        name: name || person.name,
+        age: age || person.age,
+        hobbies: hobbies || person.hobbies,
+      };
+
+      const isValidPerson = validationPerson(personData);
+
+      if (isValidPerson) {
+        const updPerson = await updateData(personId, personData);
+
+        res.writeHead(STATUS_CODE.OK, CONTENT_TYPE.JSON);
+        res.end(JSON.stringify(updPerson));
+      }
+    } else {
+      errorInvalidPerson(req, res);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { getPersons, getPersonById, setNewPerson, updatePerson };

@@ -26,4 +26,14 @@ const createPerson = person => {
   });
 };
 
-module.exports = { getData, getById, createPerson };
+const updateData = (id, person) => {
+  return new Promise((resolve, reject) => {
+    const personIndex = data.findIndex(curr => curr.id === id);
+    data[personIndex] = { id, ...person };
+
+    fs.writeFileSync("./data/persons.json", JSON.stringify(data));
+    resolve(data[personIndex]);
+  });
+};
+
+module.exports = { getData, getById, createPerson, updateData };

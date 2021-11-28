@@ -5,6 +5,7 @@ const {
   getPersons,
   getPersonById,
   setNewPerson,
+  updatePerson,
 } = require("./controllers/personController");
 const { errorNotFound, errorMethodNotAllowed } = require("./utils/errors");
 const { API_PATH, METHOD } = require("./utils/constants");
@@ -23,6 +24,8 @@ const server = http.createServer((req, res) => {
   } else if (personId) {
     if (req.method === METHOD.GET) {
       getPersonById(req, res, personId);
+    } else if (req.method === METHOD.PUT) {
+      updatePerson(req, res, personId);
     } else {
       errorMethodNotAllowed(req, res);
     }
