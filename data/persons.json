@@ -1,1 +1,8 @@
-[{"id":"1","name":"Nick","age":"36","hobbies":["soccer","development","cosmos"]},{"id":"2","name":"Nick2","age":"36_36","hobbies":["soccer","development","cosmos"]},{"id":"9f8dc551-adbe-4cf8-8d17-0477a30b6dcb","name":"nick","age":"36_36","hobbies":"so"},{"id":"8bac0e59-d454-4982-b300-cfe195c0a3ff","name":"nick","age":"36_36","hobbies":"so"},{"id":"d6b67074-5b84-4ad3-9106-27206c10c01c","name":"nick","age":"36_36","hobbies":"so"}]
+[
+  {
+    "id": "1",
+    "name": "Nick",
+    "age": "36",
+    "hobbies": ["soccer", "development", "cosmos"]
+  }
+]

@@ -1,7 +1,7 @@
 const fs = require("fs");
 const Uuid = require("uuid");
 
-const data = require("../data/persons.json");
+let data = require("../data/persons.json");
 
 const getData = () => {
   return new Promise((resolve, reject) => {
@@ -36,4 +36,13 @@ const updateData = (id, person) => {
   });
 };
 
-module.exports = { getData, getById, createPerson, updateData };
+const removeData = id => {
+  return new Promise((resolve, reject) => {
+    data = data.filter(curr => curr.id !== id);
+
+    fs.writeFileSync("./data/persons.json", JSON.stringify(data));
+    resolve();
+  });
+};
+
+module.exports = { getData, getById, createPerson, updateData, removeData };

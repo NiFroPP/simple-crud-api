@@ -3,6 +3,7 @@ const {
   getById,
   createPerson,
   updateData,
+  removeData,
 } = require("../models/personModel");
 const { STATUS_CODE, CONTENT_TYPE } = require("../utils/constants");
 const { errorBadRequest, errorInvalidPerson } = require("../utils/errors");
@@ -68,8 +69,6 @@ const updatePerson = async (req, res, personId) => {
   try {
     const person = await getById(personId);
 
-    console.log(person);
-
     if (!person) {
       errorBadRequest(req, res);
     }
@@ -108,4 +107,31 @@ const updatePerson = async (req, res, personId) => {
   }
 };
 
-module.exports = { getPersons, getPersonById, setNewPerson, updatePerson };
+const deletePerson = async (req, res, personId) => {
+  try {
+    const person = await getById(personId);
+
+    if (!person) {
+      errorBadRequest(req, res);
+    }
+
+    await removeData(personId);
+
+    res.writeHead(STATUS_CODE.OK, CONTENT_TYPE.JSON);
+    res.end(
+      JSON.stringify({
+        message: `Person '${personId}' was successfully removed`,
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = {
+  getPersons,
+  getPersonById,
+  setNewPerson,
+  updatePerson,
+  deletePerson,
+};

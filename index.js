@@ -6,6 +6,7 @@ const {
   getPersonById,
   setNewPerson,
   updatePerson,
+  deletePerson,
 } = require("./controllers/personController");
 const { errorNotFound, errorMethodNotAllowed } = require("./utils/errors");
 const { API_PATH, METHOD } = require("./utils/constants");
@@ -26,6 +27,8 @@ const server = http.createServer((req, res) => {
       getPersonById(req, res, personId);
     } else if (req.method === METHOD.PUT) {
       updatePerson(req, res, personId);
+    } else if (req.method === METHOD.DELETE) {
+      deletePerson(req, res, personId);
     } else {
       errorMethodNotAllowed(req, res);
     }
