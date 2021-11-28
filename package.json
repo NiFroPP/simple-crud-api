@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start:dev": "nodemon index.js",
+    "start:prod": "webpack --mode production && node dist/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -20,10 +21,13 @@
   "homepage": "https://github.com/NiFroPP/simple-crud-api#readme",
   "devDependencies": {
     "jest": "^27.3.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "webpack-node-externals": "^3.0.0"
   }
 }

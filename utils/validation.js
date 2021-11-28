@@ -1,3 +1,5 @@
+const { version, validate } = require("uuid");
+
 const { PERSON_KEYS } = require("./constants");
 
 const validationPerson = person => {
@@ -12,6 +14,8 @@ const validationPerson = person => {
       case PERSON_KEYS.age:
         break;
       case PERSON_KEYS.hobbies:
+        const isArray = Array.isArray(person[key]);
+        if (!isArray) return false;
         break;
       default:
         return false;
@@ -21,7 +25,7 @@ const validationPerson = person => {
   return true;
 };
 
-function validationJson(str) {
+const validationJson = str => {
   try {
     JSON.parse(str);
   } catch (e) {
@@ -29,5 +33,8 @@ function validationJson(str) {
   }
 
   return true;
-}
-module.exports = { validationPerson, validationJson };
+};
+
+const uuidValidateV4 = uuid => validate(uuid) && version(uuid) === 4;
+
+module.exports = { validationPerson, validationJson, uuidValidateV4 };

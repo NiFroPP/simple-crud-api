@@ -40,6 +40,7 @@ const removeData = id => {
   return new Promise((resolve, reject) => {
     data = data.filter(curr => curr.id !== id);
 
+    console.log(data);
     fs.writeFileSync("./data/persons.json", JSON.stringify(data));
     resolve();
   });

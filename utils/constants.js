@@ -16,6 +16,7 @@ const STATUS_CODE = {
   BAD_REQUEST: 400,
   NOT_FOUND: 404,
   NOT_ALLOWED: 405,
+  SERVER_ERROR: 500,
 };
 
 const ERROR_MESSAGES = {
@@ -23,6 +24,8 @@ const ERROR_MESSAGES = {
   not_allowed: "This method not allowed",
   bad_request: "Bad request. This '/person/{id}' not exist",
   missing_field: "Missing required request fields 'name', 'age' or 'hobbies'",
+  person_not_found: "This '/person/{id}' not found",
+  invalid_uuid: "Invalid person`s UUID",
 };
 
 const CONTENT_TYPE = {
