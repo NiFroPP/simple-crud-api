@@ -1,7 +1,8 @@
 const fs = require("fs");
 const Uuid = require("uuid");
 
-let data = require("../data/persons.json");
+// let data = require("../data/persons.json");
+let data = [];
 
 const getData = () => {
   return new Promise((resolve, reject) => {
@@ -21,7 +22,7 @@ const createPerson = person => {
     const newPerson = { id: Uuid.v4(), ...person };
     data.push(newPerson);
 
-    fs.writeFileSync("./data/persons.json", JSON.stringify(data));
+    // fs.writeFileSync("./data/persons.json", JSON.stringify(data));
     resolve(newPerson);
   });
 };
@@ -31,7 +32,7 @@ const updateData = (id, person) => {
     const personIndex = data.findIndex(curr => curr.id === id);
     data[personIndex] = { id, ...person };
 
-    fs.writeFileSync("./data/persons.json", JSON.stringify(data));
+    // fs.writeFileSync("./data/persons.json", JSON.stringify(data));
     resolve(data[personIndex]);
   });
 };
@@ -41,7 +42,7 @@ const removeData = id => {
     data = data.filter(curr => curr.id !== id);
 
     console.log(data);
-    fs.writeFileSync("./data/persons.json", JSON.stringify(data));
+    // fs.writeFileSync("./data/persons.json", JSON.stringify(data));
     resolve();
   });
 };
